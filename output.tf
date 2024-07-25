@@ -1,47 +1,29 @@
 output "vpc_id" {
-    value = var.vpc_id
-    description = "value of the vpc"
-  
+  value = module.eks.vpc_id
+  description = "getting vpc id"
 }
-output "aws_eks_cluster" {
-    value = var.aws_eks_cluster
-    description = "value of the eks-cluster"
-  
+
+output "cluster_name" {
+  value = module.eks.cluster_name
+  description = "getting eks cluster id"
 }
-output "aws_iam_role" {
-    value = var.aws_iam_role
-    description = "value of the iam-role"
-  
+
+output "node_group_name" {
+  value = module.eks.node_group_name
+  description = "getting eks worker node"
 }
-output "eks_worker_node_policy" {
-    value = var.eks_worker_node_policy
-    description = "value of the policy-arn for worker-node-policy"
-  
-}
-output "eks_cni_policy" {
-    value = var.eks_cni_policy
-    description = "value of the eks-cni-policy"
-  
-}
-output "AmazonEC2ContainerRegistryReadOnly" {
-    value = var.AmazonEC2ContainerRegistryReadOnly
-    description = "value of the AmazonEC2ContainerRegistryReadOnly"
-  
-}
+
 output "desired_size" {
-    value = var.desired_size
-    description = "value of the desired-size"
-
-  
+  value = module.eks.desired_size
+  description = "getting desrired size"
 }
+
 output "max_size" {
-    value = var.max_size
-    description = "value of the max-size"
-
-  
+  value = module.eks.max_size
+  description = "getting max size"
 }
+
 output "min_size" {
-    value = var.min_size
-    description = "value of the min-size"
-  
+  value = module.eks.min_size
+  description = "getting min size"
 }

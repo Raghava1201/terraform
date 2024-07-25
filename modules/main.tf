@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "eks_cluster" {
-  name     = "lms-eks-cluster"
+  name     = var.cluster_name
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
@@ -72,14 +72,14 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
 
 resource "aws_eks_node_group" "eks_worker_nodes" {
   cluster_name    = aws_eks_cluster.eks_cluster.name
-  node_group_name = "eks_worker_nodes"
+  node_group_name = var.node_group_name
   node_role_arn   = aws_iam_role.eks_worker_role.arn
   subnet_ids      = [aws_subnet.public_subnet.id, aws_subnet.private_subnet.id]
 
   scaling_config {
-    desired_size = 2
-    max_size     = 2
-    min_size     = 1
+    desired_size = var.desired_size
+    max_size     = var.max_size
+    min_size     = var.min_size
   }
 
   depends_on = [aws_iam_role_policy_attachment.eks_worker_node_policy, aws_iam_role_policy_attachment.eks_cni_policy, aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly]
